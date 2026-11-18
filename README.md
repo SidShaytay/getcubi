@@ -2,39 +2,42 @@
 
 **A persistent workspace for your coding agents.**
 
-Cubi gives each project its own reusable environment, powered by NVIDIA OpenShell. Your project files stay live on your machine, while your agents work with development tools and persistent guest-local settings.
+Cubi gives each project its own isolated environment for coding agents such as Claude Code, Codex and Pi. It is powered by NVIDIA OpenShell. Run `cubi` in a project folder and you get the same environment every time you come back.
 
-## Download status
+## Why use it
 
-**Binary releases and the installer are in preparation.** There is no supported public installation command yet. You do not need to clone this repository to use a future release; it contains public documentation and distribution materials, not the Cubi implementation.
+- **Live project files.** Your project is shared with the environment. Edits land in your host files immediately.
+- **Confined agents.** Agents run inside a microVM by default, or a rootless Podman container, under OpenShell sandbox policy. Your host home directory, credentials and SSH agent are not shared.
+- **Settings that persist.** Development tools, agent settings and history stay in the environment between sessions.
+- **One environment per project.** Multiple agents and Git worktrees for the same project share it.
+- **Stop and start.** Stop an environment to free resources and start it again later. Guest files are kept.
+- **SSH access.** Connect a desktop agent over SSH with a generated alias and a pinned host key.
 
-- [View releases](https://github.com/SidShaytay/getcubi/releases)
-- [Read the product overview](docs/index.html)
-- [Report a problem or request a feature](https://github.com/SidShaytay/getcubi/issues)
-
-Linux x86-64 is the initial target. macOS and Windows support are planned and are not available yet. Exact Linux requirements and supported distributions will accompany the first qualified binary release.
-
-## The intended experience
-
-Once the first supported release is available, install its verified binary using the published instructions. Then open a terminal in your project and run:
+## How it works
 
 ```sh
 cd /path/to/your/project
-cubi
+cubi             # open or reuse this project's environment
+cubi claude      # run Claude Code in it
+cubi codex       # run Codex in it
+cubi pi          # run Pi in it
+cubi info        # show the SSH host and guest folder for a desktop agent
+cubi stop        # stop the environment and keep its files
+cubi start       # start it again
 ```
 
-Cubi will prepare or reopen that project's workspace. Project edits affect the host files immediately. Host account credentials are not automatically copied into the workspace; authenticate using the release's supported instructions.
+Host account credentials are not copied into the environment. Sign in to your agents inside it, or use your desktop client's supported flow.
 
-Installation, first-launch requirements and update instructions will be published with the release. Package-manager installations will use their package manager for updates. Do not use unannounced install commands or third-party packages claiming to be official Cubi releases.
+## Availability
 
-## License and organizational use
+Cubi is not released yet. There is no install command today. Release builds will appear on the [releases page](https://github.com/SidShaytay/getcubi/releases) with installation instructions.
 
-Cubi is proprietary, closed-source software. Free use is limited to individuals acting privately for personal, noncommercial purposes. Use by or on behalf of an organization—including a nonprofit, school or research institution—and commercial use require a separate written license. Full terms and third-party notices will accompany each release.
+Linux x86-64 comes first. macOS and Windows are planned.
 
-For an organizational or commercial licensing inquiry, [open an issue](https://github.com/SidShaytay/getcubi/issues/new?title=Licensing%20inquiry). Share only a general description of the intended use; do not post private contact, billing or account information publicly.
+## Feedback
 
-## Website publication
+Questions, bug reports and feature requests are welcome in [issues](https://github.com/SidShaytay/getcubi/issues). A short overview is also available on the [project page](docs/index.html).
 
-The static landing page is in `docs/index.html`; it uses no build tool or external assets. An owner can enable GitHub Pages in **Settings → Pages**, select **Deploy from a branch**, choose **main** and **/docs**, then save. Pages is not automatically enabled by adding these files. The expected project URL after activation is `https://sidshaytay.github.io/getcubi/`.
+## License
 
-Only public product materials belong in this repository. Release archives must contain approved binary distribution files and required notices, without implementation source or private development history.
+Cubi is free for personal, noncommercial use. Organizations and commercial use need a license. Full terms will ship with each release. For licensing, [open an issue](https://github.com/SidShaytay/getcubi/issues/new?title=Licensing%20inquiry) and we will be glad to help.
