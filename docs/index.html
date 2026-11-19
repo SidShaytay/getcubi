@@ -3,9 +3,9 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="description" content="Cubi gives your coding agents a persistent workspace for each project. Linux binary releases are in preparation.">
+  <meta name="description" content="Cubi gives each project a persistent, isolated environment for coding agents, powered by NVIDIA OpenShell.">
   <meta name="color-scheme" content="dark">
-  <title>Cubi — a workspace for your coding agents</title>
+  <title>Cubi: a workspace for your coding agents</title>
   <style>
     :root { color-scheme: dark; --bg:#0b1220; --panel:#111e30; --line:#2b3c50; --ink:#f3f7fc; --muted:#b5c4d5; --accent:#82f1d3; }
     * { box-sizing:border-box; }
@@ -32,6 +32,7 @@
     .terminal-title { padding:13px 20px; color:var(--muted); border-bottom:1px solid var(--line); font-size:.78rem; letter-spacing:.02em; }
     .terminal-content { padding:26px; }
     pre { font-family:ui-monospace,SFMono-Regular,Consolas,monospace; line-height:1.9; font-size:.95rem; margin:0; white-space:pre-wrap; overflow-wrap:anywhere; }
+    code { font-family:ui-monospace,SFMono-Regular,Consolas,monospace; font-size:.95em; color:var(--ink); }
     .prompt { color:var(--accent); }
     .caption { color:var(--muted); font-size:.84rem; margin:20px 0 0; }
     .notice { border:1px solid #35685e; border-left:4px solid var(--accent); border-radius:10px; padding:22px 26px; background:#10252c; }
@@ -60,45 +61,55 @@
   <div class="wrap">
     <header>
       <a class="brand" href="#top" aria-label="Cubi home"><span class="mark" aria-hidden="true"></span>Cubi</a>
-      <nav aria-label="Main navigation"><a href="#workspace">How it works</a><a href="#download">Download status</a><a href="https://github.com/SidShaytay/getcubi">GitHub ↗</a></nav>
+      <nav aria-label="Main navigation"><a href="#workspace">Why Cubi</a><a href="#usage">How it works</a><a href="#download">Availability</a><a href="https://github.com/SidShaytay/getcubi">GitHub ↗</a></nav>
     </header>
     <main id="top">
       <section class="hero" aria-labelledby="hero-title">
         <div>
           <p class="eyebrow">A home for your coding agents</p>
           <h1 id="hero-title">Your project.<br>Your agents.<br><span>Their own workspace.</span></h1>
-          <p class="intro">Cubi gives each project a persistent environment, powered by NVIDIA OpenShell. Keep your files live, your tools ready, and your workspace available when you return.</p>
-          <div class="actions"><a class="button" href="#download">Check availability</a><a href="https://github.com/SidShaytay/getcubi/issues">Questions &amp; feedback ↗</a></div>
+          <p class="intro">Cubi gives each project its own isolated environment for Claude Code, Codex and Pi, powered by NVIDIA OpenShell. Run <code>cubi</code> in a project folder and you get the same environment every time you come back.</p>
+          <div class="actions"><a class="button" href="#download">Check availability</a><a href="https://github.com/SidShaytay/getcubi/issues">Questions and feedback ↗</a></div>
         </div>
-        <div class="terminal" aria-label="Preview of the intended launch experience">
-          <div class="terminal-title">The intended launch experience</div>
+        <div class="terminal" aria-label="Example Cubi session">
+          <div class="terminal-title">In your project folder</div>
           <div class="terminal-content"><pre><span class="prompt">$</span> cd your-project
-<span class="prompt">$</span> cubi</pre><p class="caption">A preview of the upcoming release flow. Public binary installation is not available yet.</p></div>
+<span class="prompt">$</span> cubi claude</pre><p class="caption">Opens or reuses the project's environment and runs Claude Code in it.</p></div>
         </div>
-      </section>
-      <section class="notice" id="download" aria-labelledby="availability-title">
-        <h2 id="availability-title">Binary releases are in preparation.</h2>
-        <p>The installer and supported installation instructions will arrive with the first qualified release. No cloning or source build will be required. <a href="https://github.com/SidShaytay/getcubi/releases">View releases ↗</a></p>
-        <div class="platforms" aria-label="Platform roadmap"><span class="tag">Linux x86-64 · initial target</span><span class="tag">macOS · planned</span><span class="tag">Windows · planned</span></div>
       </section>
       <section class="section" id="workspace" aria-labelledby="workspace-title">
-        <h2 id="workspace-title">One project. A workspace you can return to.</h2>
+        <h2 id="workspace-title">Why use it</h2>
         <div class="cards">
-          <article class="card"><span class="number">01 / PROJECT</span><h3>Work on your real files</h3><p>Your selected project is shared with the environment. Edits affect your host files immediately.</p></article>
-          <article class="card"><span class="number">02 / WORKSPACE</span><h3>Keep your environment</h3><p>Development tools and guest-local agent settings stay with the project environment between sessions.</p></article>
-          <article class="card"><span class="number">03 / ACCESS</span><h3>Choose your agents</h3><p>Run coding agents in the workspace. Host account credentials are not automatically copied; authenticate through supported flows.</p></article>
+          <article class="card"><span class="number">01 / FILES</span><h3>Live project files</h3><p>Your project is shared with the environment. Edits land in your host files immediately.</p></article>
+          <article class="card"><span class="number">02 / ISOLATION</span><h3>Confined agents</h3><p>Agents run in a microVM by default, or a rootless Podman container, under OpenShell sandbox policy. Your host home, credentials and SSH agent are not shared.</p></article>
+          <article class="card"><span class="number">03 / SETTINGS</span><h3>Settings that persist</h3><p>Development tools, agent settings and history stay in the environment between sessions.</p></article>
+          <article class="card"><span class="number">04 / PROJECT</span><h3>One environment per project</h3><p>Multiple agents and Git worktrees for the same project share it.</p></article>
+          <article class="card"><span class="number">05 / LIFECYCLE</span><h3>Stop and start</h3><p>Stop an environment to free resources and start it again later. Guest files are kept.</p></article>
+          <article class="card"><span class="number">06 / SSH</span><h3>SSH access</h3><p>Connect a desktop agent over SSH with a generated alias and a pinned host key.</p></article>
         </div>
       </section>
-      <section class="section split" aria-labelledby="start-title">
-        <h2 id="start-title">A simple start.<br>A clear update path.</h2>
-        <div><p>The first release will provide verified binaries, exact Linux requirements and installation instructions. Install Cubi, open a terminal in your project, and launch its workspace.</p><p>Update instructions will accompany the release. Package-manager installations will use their package manager for updates. macOS and Windows are future work, not current support claims.</p></div>
+      <section class="section split" id="usage" aria-labelledby="usage-title">
+        <h2 id="usage-title">How it works</h2>
+        <div><div class="terminal"><div class="terminal-content"><pre><span class="prompt">$</span> cubi        <span class="caption"># open or reuse this project's environment</span>
+<span class="prompt">$</span> cubi codex  <span class="caption"># run Codex in it</span>
+<span class="prompt">$</span> cubi pi     <span class="caption"># run Pi in it</span>
+<span class="prompt">$</span> cubi info   <span class="caption"># SSH host and guest folder</span>
+<span class="prompt">$</span> cubi stop   <span class="caption"># stop it, keep its files</span>
+<span class="prompt">$</span> cubi start  <span class="caption"># start it again</span></pre></div></div><p style="margin-top:18px">Host account credentials are not copied into the environment. Sign in to your agents inside it, or use your desktop client's supported flow.</p></div>
+      </section>
+      <section class="section" id="download" aria-labelledby="availability-title">
+        <div class="notice">
+          <h2 id="availability-title">Not released yet</h2>
+          <p>There is no install command today. Release builds will appear on the <a href="https://github.com/SidShaytay/getcubi/releases">releases page ↗</a> with installation instructions. Linux x86-64 comes first.</p>
+          <div class="platforms" aria-label="Platform roadmap"><span class="tag">Linux x86-64 · first</span><span class="tag">macOS · planned</span><span class="tag">Windows · planned</span></div>
+        </div>
       </section>
       <section class="section split" aria-labelledby="license-title">
-        <h2 id="license-title">Personal projects.<br>Organizational use.</h2>
-        <div><p>Cubi is proprietary, closed-source software. Free use is limited to individuals acting privately for personal, noncommercial purposes. Organizational use—including nonprofits, schools and research institutions—and commercial use require a separate written license.</p><p>Full terms and third-party notices will accompany each release. For licensing, <a href="https://github.com/SidShaytay/getcubi/issues/new?title=Licensing%20inquiry">open an inquiry</a> with a general description of your needs. Please keep private contact, billing and account details out of public issues.</p></div>
+        <h2 id="license-title">License</h2>
+        <div><p>Cubi is free for personal, noncommercial use. Organizations and commercial use need a license. Full terms will ship with each release. For licensing, <a href="https://github.com/SidShaytay/getcubi/issues/new?title=Licensing%20inquiry">open an issue</a> and we will be glad to help.</p></div>
       </section>
     </main>
-    <footer><p>Cubi · Persistent workspaces for coding agents.</p><a href="https://github.com/SidShaytay/getcubi/issues">Public support &amp; feedback ↗</a></footer>
+    <footer><p>Cubi · Persistent workspaces for coding agents.</p><a href="https://github.com/SidShaytay/getcubi/issues">Support and feedback ↗</a></footer>
   </div>
 </body>
 </html>
